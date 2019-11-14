@@ -2,7 +2,9 @@ package com.android.tikalarcorefuse.data.source
 
 import androidx.lifecycle.MutableLiveData
 import com.android.tikalarcorefuse.data.Room
+import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import timber.log.Timber.d
 import timber.log.Timber.e
 
@@ -37,26 +39,27 @@ class GameRepository private constructor() {
 
     }
 
-    private fun fetchRooms() {
+    fun fetchRooms() {
         val collectionRef = db.collection(ROOM_COLLECTION)
-        collectionRef.get()
-            .addOnSuccessListener { result ->
+        collectionRef .addSnapshotListener(EventListener<QuerySnapshot> { result, e ->
+            if (e != null) {
+               e("listen:error $e")
+                return@EventListener
+            }
+            if (result != null) {
                 for (document in result) {
-                    val room = document.toObject(Room::class.java)
-                    room.id = document.id
-                    roomsHash[document.id] = room
+//                    val room = document.toObject(Room::class.java)
+//                    room.id = document.id
+//                    roomsHash[document.id] = room
                 }
-                d("Room item successfully read!")
                 roomsLiveData.postValue(roomsHash.values.toList())
             }
-            .addOnFailureListener {
-                e("Error reading document")
-            }
+        })
+
     }
 
-    fun getRooms() {
-        fetchRooms()
-    }
+
+
 
     private object HOLDER {
         val INSTANCE = GameRepository()
