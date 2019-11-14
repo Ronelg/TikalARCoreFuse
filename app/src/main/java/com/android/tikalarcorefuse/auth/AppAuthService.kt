@@ -12,7 +12,7 @@ object AppAuthService : BaseAuth {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun signInAnonymusly() {
+    override fun signInAnonymous() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

@@ -113,7 +113,7 @@ class SignInFragment : Fragment() {
 
             signInButton.visibility = View.GONE
             signOutAndDisconnect.visibility = View.VISIBLE
-            findNavController(this).navigate(R.id.action_signInFragment_to_createRoom)
+            findNavController(this).navigate(R.id.action_signInFragment_to_roomListFragment)
         } else {
             status.setText(R.string.signed_out)
             detail.text = null
