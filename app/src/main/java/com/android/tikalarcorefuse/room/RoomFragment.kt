@@ -46,5 +46,4 @@ class RoomFragment : Fragment() {
     fun updateServerOnPoopedBaloon() {
         // GameRepository.instance.
     }
-
 }

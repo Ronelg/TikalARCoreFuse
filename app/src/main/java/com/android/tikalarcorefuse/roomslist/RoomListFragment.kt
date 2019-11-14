@@ -38,7 +38,7 @@ class RoomListFragment : Fragment() {
         getRooms()
 
         createRoomButton.setOnClickListener {
-            findNavController().navigate(R.id.action_createRoom_to_createRoomARFragment)
+            findNavController().navigate(R.id.action_roomListFragment_to_createRoom)
         }
     }
 
