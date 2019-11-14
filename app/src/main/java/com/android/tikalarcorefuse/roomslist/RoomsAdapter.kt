@@ -37,6 +37,7 @@ class RoomsAdapter :
 
         fun bind(room: Room) {
             binding.roomName = room.name
+            binding.numOfUser = "Users: ${room.numOfUser ?: 0}"
         }
     }
 }

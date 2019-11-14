@@ -1,14 +1,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="roomName"
             type="String" />
+
+        <variable
+            name="numOfUser"
+            type="String" />
     </data>
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="?android:attr/selectableItemBackground"
@@ -21,9 +26,25 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_margin="8dp"
-            android:text="@{roomName}" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@{roomName}"
+            tools:text="Title"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            tools:text="SubTitle"
+            android:text="@{numOfUser}"
+            app:layout_constraintStart_toStartOf="@+id/text_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_name" />
 
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

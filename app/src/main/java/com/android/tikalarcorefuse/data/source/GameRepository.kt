@@ -1,6 +1,5 @@
 package com.android.tikalarcorefuse.data.source
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.tikalarcorefuse.data.Room
 import com.google.firebase.firestore.FirebaseFirestore
@@ -43,7 +42,6 @@ class GameRepository private constructor() {
                 if (it.isEmpty) {
                     d("No rooms")
                 } else {
-
                     val rooms = it.toObjects(Room::class.java)
 
                     roomsLiveData.postValue(rooms)
