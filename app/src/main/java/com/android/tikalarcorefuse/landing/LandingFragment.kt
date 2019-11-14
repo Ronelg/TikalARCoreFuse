@@ -21,14 +21,14 @@ import timber.log.Timber
  */
 class LandingFragment : Fragment() {
 
-    lateinit var gso : GoogleSignInOptions
-    lateinit var auth : FirebaseAuth
+    private lateinit var gso: GoogleSignInOptions
+    private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Timber.v("onCreate")
         super.onCreate(savedInstanceState)
 
-        Log.i("LandingFragment","onCreate: ")
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
@@ -45,7 +45,6 @@ class LandingFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_landing, container, false)
     }
 
-
     override fun onStart() {
         super.onStart()
         checkLoginAndNavigate()
@@ -54,14 +53,15 @@ class LandingFragment : Fragment() {
     private fun checkLoginAndNavigate() {
         val currentUser = auth.currentUser
 
-        if(currentUser == null){
-            Log.i("LandingPage", "Not logged in, navigate to signInPage")
-            NavHostFragment.findNavController(this).navigate(R.id.action_landingFragment_to_signInFragment)
+        if (currentUser == null) {
+            Timber.i("Not logged in, navigate to signInPage")
+            NavHostFragment.findNavController(this)
+                .navigate(R.id.action_landingFragment_to_signInFragment)
         } else {
-            Log.i("LandingPage","Logged in, navigate to roomsList")
-            NavHostFragment.findNavController(this).navigate(R.id.action_landingFragment_to_roomListFragment)
+            Timber.i("Logged in, navigate to roomsList")
+            NavHostFragment.findNavController(this)
+                .navigate(R.id.action_landingFragment_to_roomListFragment)
         }
-
     }
 
 }
