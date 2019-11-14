@@ -2,12 +2,10 @@ package com.android.tikalarcorefuse.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.fragment.app.Fragment
 import com.android.tikalarcorefuse.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -96,7 +94,7 @@ class SignInFragment : Fragment() {
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.e("SignInFragment","firebaseAuthWithGoogle: There was an error: $task")
+                    Timber.e("firebaseAuthWithGoogle: There was an error: $task")
                     Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
                     updateUI(null)
                 }
@@ -104,8 +102,7 @@ class SignInFragment : Fragment() {
     }
     private fun updateUI(user: FirebaseUser?) {
 //        hideProgressDialog()
-        Log.i("SignInFragment", "User null")
-        Timber.i("User null")
+        Timber.d("User $user")
 
         status.setText(R.string.signed_out)
         detail.text = null
@@ -129,7 +126,6 @@ class SignInFragment : Fragment() {
     }
 
     companion object{
-        private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
     }
 }
