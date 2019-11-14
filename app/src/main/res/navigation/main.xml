@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/createRoom"
-        android:name="com.android.tikalarcorefuse.createroom.CreateRoom"
+        android:name="com.android.tikalarcorefuse.createroom.CreateRoomFragment"
         android:label="CreateRoom" />
 </navigation>

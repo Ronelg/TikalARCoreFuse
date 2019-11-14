@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.android.tikalarcorefuse.R
 import com.google.firebase.firestore.FirebaseFirestore
 
-class CreateRoom : Fragment() {
+class CreateRoomFragment : Fragment() {
 
     val db = FirebaseFirestore.getInstance()
 
