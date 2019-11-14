@@ -1,9 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.tikalarcorefuse">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <!-- This tag indicates that this application requires ARCore.  This results in the application
-         only being visible in the Google Play Store on devices that support ARCore. -->
+    <!--
+ This tag indicates that this application requires ARCore.  This results in the application
+         only being visible in the Google Play Store on devices that support ARCore.
+    -->
     <uses-feature
         android:name="android.hardware.camera.ar"
         android:required="true" />
@@ -24,13 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <!-- This tag indicates that this application requires ARCore.  This results in the Google Play
+        <!--
+ This tag indicates that this application requires ARCore.  This results in the Google Play
           Store downloading and installing ARCore along with the application.
           Application code must still call ArCoreApk.requestInstall() before beginning an ARCore
-          sessions, in case the user uninstalls ARCore for any reason. -->
+          sessions, in case the user uninstalls ARCore for any reason.
+        -->
         <meta-data
             android:name="com.google.ar.core"
             android:value="required" />
     </application>
+
 </manifest>
