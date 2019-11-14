@@ -12,6 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         (arFragment as ArFragment).setOnTapArPlaneListener { hitResult, plane, motionEvent ->
         }
 
