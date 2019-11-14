@@ -2,10 +2,11 @@ package com.android.tikalarcorefuse.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.android.tikalarcorefuse.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -35,8 +36,8 @@ class SignInFragment : Fragment() {
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
-        googleSignInClient = GoogleSignIn.getClient(activity!!, gso)
         auth = FirebaseAuth.getInstance()
+        googleSignInClient = GoogleSignIn.getClient(activity!!, gso)
     }
 
     override fun onCreateView(
@@ -86,9 +87,6 @@ class SignInFragment : Fragment() {
     }
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
 
-        // [START_EXCLUDE silent]
-        // [END_EXCLUDE]
-
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
@@ -98,6 +96,7 @@ class SignInFragment : Fragment() {
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
+                    Log.e("SignInFragment","firebaseAuthWithGoogle: There was an error: $task")
                     Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
                     updateUI(null)
                 }
@@ -105,28 +104,22 @@ class SignInFragment : Fragment() {
     }
     private fun updateUI(user: FirebaseUser?) {
 //        hideProgressDialog()
-        if (user != null) {
-            status.text = getString(R.string.google_status_fmt, user.email)
-            detail.text = getString(R.string.firebase_status_fmt, user.uid)
+        Log.i("SignInFragment", "User null")
+        Timber.i("User null")
 
-            signInButton.visibility = View.GONE
-            signOutAndDisconnect.visibility = View.VISIBLE
-            findNavController(this).navigate(R.id.action_signInFragment_to_roomListFragment)
-        } else {
-            status.setText(R.string.signed_out)
-            detail.text = null
+        status.setText(R.string.signed_out)
+        detail.text = null
 
-            signInButton.visibility = View.VISIBLE
-            signOutAndDisconnect.visibility = View.GONE
-        }
+        signInButton.visibility = View.VISIBLE
+        signOutAndDisconnect.visibility = View.GONE
     }
 
-    fun signIn(){
+    private fun signIn(){
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    fun signOut(){
+    private fun signOut(){
         auth.signOut()
 
         // Google sign out
@@ -136,7 +129,6 @@ class SignInFragment : Fragment() {
     }
 
     companion object{
-
         private const val TAG = "GoogleActivity"
         private const val RC_SIGN_IN = 9001
     }
