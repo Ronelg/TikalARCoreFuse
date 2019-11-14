@@ -6,19 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.android.tikalarcorefuse.R
-import com.google.firebase.firestore.FirebaseFirestore
 
-class CreateRoom : Fragment() {
-
-    val db = FirebaseFirestore.getInstance()
+class RoomsListFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(
-            R.layout.fragment_create_room, container, false
+        return inflater.inflate(R.layout.fragment_rooms, container, false
         )
     }
 }
