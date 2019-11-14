@@ -28,23 +28,23 @@ class RoomFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(RoomViewModel::class.java)
 
         //TODO get room object from outside
-        val room = Room()
-        room.items.let {
+        val room = Room("aa", "uuu", 2, ArrayList())
+        room.items?.let {
             items = it as ArrayList<Item>
         }
     }
 
-    fun popedBaloon(baloonId:String) {
+    fun popedBaloon(baloonId: String) {
         items.forEach {
-            if (it.id==baloonId) {
+            if (it.id == baloonId) {
                 items.remove(it)
                 return
             }
         }
     }
 
-    fun updateServerOnPoopedBaloon(){
-       // GameRepository.instance.
+    fun updateServerOnPoopedBaloon() {
+        // GameRepository.instance.
     }
 
 }
