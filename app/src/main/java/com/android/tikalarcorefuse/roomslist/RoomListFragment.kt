@@ -33,9 +33,6 @@ class RoomListFragment : Fragment() {
         val binding = FragmentRoomListBinding.inflate(inflater, container, false)
         val context = this.context ?: return binding.root
 
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-        binding.layoutManager = layoutManager
         binding.recyclerView.addItemDecoration(DividerItemDecoration(context, VERTICAL))
         binding.recyclerView.adapter = adapter
         binding.clickListener = createClickListener()
