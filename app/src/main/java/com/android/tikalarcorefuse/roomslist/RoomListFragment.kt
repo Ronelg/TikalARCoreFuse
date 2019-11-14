@@ -1,4 +1,4 @@
-package com.android.tikalarcorefuse
+package com.android.tikalarcorefuse.roomslist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -35,6 +35,9 @@ class RoomListFragment : Fragment(){
 class fakeData{
 
     fun getListOfRooms(): List<RoomObject> {
-       return listOf(RoomObject("room 1"), RoomObject("room 2"))
+       return listOf(
+           RoomObject("room 1"),
+           RoomObject("room 2")
+       )
     }
 }

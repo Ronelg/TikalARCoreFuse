@@ -1,4 +1,4 @@
-package com.android.tikalarcorefuse
+package com.android.tikalarcorefuse.roomslist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
