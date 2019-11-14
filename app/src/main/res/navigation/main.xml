@@ -38,8 +38,8 @@
         android:label="CreateRoom"
         tools:layout="@layout/fragment_create_room">
         <action
-            android:id="@+id/action_createRoom_to_roomListFragment"
-            app:destination="@id/roomListFragment" />
+            android:id="@+id/action_createRoom_to_createRoomARFragment"
+            app:destination="@id/createRoomARFragment" />
     </fragment>
 
     <fragment
@@ -63,5 +63,11 @@
             android:name="RoomId"
             app:argType="string" />
     </fragment>
+
+    <fragment
+        android:id="@+id/createRoomARFragment"
+        android:name="com.android.tikalarcorefuse.createroom.CreateRoomARFragment"
+        android:label="CreateRoomARFragment"
+        tools:layout="@layout/fragment_create_room_ar"/>
 
 </navigation>

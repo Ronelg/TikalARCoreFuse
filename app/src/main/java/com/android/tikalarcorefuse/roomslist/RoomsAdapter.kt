@@ -31,17 +31,19 @@ class RoomsAdapter(val adapterClickListener: AdapterClickListener) :
                 adapterClickListener.onRoomItemClicked(getItem(position))
             }
         }
+        holder.bind(room)
     }
-
 
     inner class RoomViewHolder(
         private val binding: RoomItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        var room: Room? = null
 
         fun bind(room: Room) {
+            this.room = room
             binding.roomName = room.name
-            binding.numOfUser = "Users: ${room.numOfUser ?: 0}"
+            binding.numOfUser = "Users: ${room.numOfUser}"
         }
     }
 

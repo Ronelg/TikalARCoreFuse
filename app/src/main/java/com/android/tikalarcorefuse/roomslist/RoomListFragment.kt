@@ -33,11 +33,8 @@ class RoomListFragment : Fragment(), RoomsAdapter.AdapterClickListener {
     ): View? {
 
         val binding = FragmentRoomListBinding.inflate(inflater, container, false)
-        context ?: return binding.root
+        val context = this.context ?: return binding.root
 
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-        binding.layoutManager = layoutManager
         binding.recyclerView.addItemDecoration(DividerItemDecoration(context, VERTICAL))
         binding.recyclerView.adapter = adapter
         binding.clickListener = createClickListener()
@@ -46,7 +43,6 @@ class RoomListFragment : Fragment(), RoomsAdapter.AdapterClickListener {
         setHasOptionsMenu(true)
         return binding.root
     }
-
 
     fun getRooms(adapter: RoomsAdapter) {
         GameRepository.instance.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
@@ -57,14 +53,13 @@ class RoomListFragment : Fragment(), RoomsAdapter.AdapterClickListener {
 
     private fun createClickListener(): View.OnClickListener? {
         return View.OnClickListener {
-            findNavController().navigate(R.id.action_roomListFragment_to_createRoom)
+            findNavController().navigate(R.id.action_createRoom_to_createRoomARFragment)
         }
     }
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        val inflater: MenuInflater = inflater
         inflater.inflate(R.menu.app_menu, menu)
     }
 
