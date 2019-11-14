@@ -10,8 +10,8 @@ data class Room(
 )
 
 data class Item(
-    val id: String = "",
-    val x: Float = 0f,
-    val y: Float = 0f,
-    val z: Float = 0f
+    var baloonId: String = "",
+    var x: Float = 0f,
+    var y: Float = 0f,
+    var z: Float = 0f
 )
