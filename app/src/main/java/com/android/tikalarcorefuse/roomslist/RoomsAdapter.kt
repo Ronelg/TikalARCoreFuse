@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.tikalarcorefuse.data.Room
 import com.android.tikalarcorefuse.databinding.RoomItemBinding
 
-class RoomsAdapter :
+class RoomsAdapter(val adapterClickListener: AdapterClickListener) :
     ListAdapter<Room, RoomsAdapter.RoomViewHolder>(RoomDiffCallback()) {
 
 
@@ -23,6 +23,14 @@ class RoomsAdapter :
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
         val room = getItem(position)
+
+        holder.apply {
+            bind(room)
+            itemView.tag = room
+            itemView.setOnClickListener {
+                adapterClickListener.onRoomItemClicked(getItem(position))
+            }
+        }
         holder.bind(room)
     }
 
@@ -38,6 +46,11 @@ class RoomsAdapter :
             binding.numOfUser = "Users: ${room.numOfUser}"
         }
     }
+
+
+     interface AdapterClickListener{
+         fun onRoomItemClicked(room : Room)
+     }
 }
 
 private class RoomDiffCallback : DiffUtil.ItemCallback<Room>() {
