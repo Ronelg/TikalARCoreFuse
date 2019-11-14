@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
 
-
-
 class CreateRoom : Fragment() {
 
     val db = FirebaseFirestore.getInstance()
