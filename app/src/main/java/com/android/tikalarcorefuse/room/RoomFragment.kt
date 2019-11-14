@@ -36,7 +36,7 @@ class RoomFragment : Fragment() {
 
     fun popedBaloon(baloonId: String) {
         items.forEach {
-            if (it.id == baloonId) {
+            if (it.baloonId == baloonId) {
                 items.remove(it)
                 return
             }

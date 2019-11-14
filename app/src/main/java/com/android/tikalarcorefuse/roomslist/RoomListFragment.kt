@@ -2,7 +2,6 @@ package com.android.tikalarcorefuse.roomslist
 
 import android.os.Bundle
 import android.view.*
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -16,12 +15,11 @@ import com.android.tikalarcorefuse.data.GameViewModel
 import com.android.tikalarcorefuse.data.Room
 import com.android.tikalarcorefuse.data.ViewModelFactory
 import com.android.tikalarcorefuse.data.source.GameRepository
-import com.android.tikalarcorefuse.databinding.FragmentRoomListBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_room_list.*
 import timber.log.Timber
 
-class RoomListFragment : Fragment(), RoomsAdapter.AdapterClickListener {
-
+class RoomListFragment : Fragment() {
 
     private val viewModel: GameViewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory.instance).get(GameViewModel::class.java)
@@ -30,7 +28,7 @@ class RoomListFragment : Fragment(), RoomsAdapter.AdapterClickListener {
     lateinit var adapter : RoomsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = RoomsAdapter(this)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -38,17 +36,7 @@ class RoomListFragment : Fragment(), RoomsAdapter.AdapterClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val binding = FragmentRoomListBinding.inflate(inflater, container, false)
-        val context = this.context ?: return binding.root
-
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(context, VERTICAL))
-        binding.recyclerView.adapter = adapter
-        binding.clickListener = createClickListener()
-
-        getRooms(adapter)
-        setHasOptionsMenu(true)
-        return binding.root
+        return inflater.inflate(R.layout.fragment_room_list, container, false)
     }
 
     fun getRooms(adapter: RoomsAdapter) {
@@ -58,12 +46,10 @@ class RoomListFragment : Fragment(), RoomsAdapter.AdapterClickListener {
         })
     }
 
-    private fun createClickListener(): View.OnClickListener? {
-        return View.OnClickListener {
+        createRoomButton.setOnClickListener {
             findNavController().navigate(R.id.action_createRoom_to_createRoomARFragment)
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -72,24 +58,34 @@ class RoomListFragment : Fragment(), RoomsAdapter.AdapterClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Timber.i("onOptionsItemSelected: ")
-        if(item.itemId == R.id.logout){
+        if (item.itemId == R.id.logout) {
             try {
                 FirebaseAuth.getInstance().signOut()
-                NavHostFragment.findNavController(this).navigate(R.id.action_roomListFragment_to_landingFragment)
+                NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_roomListFragment_to_landingFragment)
                 return true
-            } catch (e : Throwable){
+            } catch (e: Throwable) {
 
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onRoomItemClicked(room: Room) {
-        findNavController().navigate(R.id.action_roomListFragment_to_gameWaitFragment, bundleOf("RoomId" to room.id))
+    private fun setupRecyclerView() {
+        adapter = RoomsAdapter()
+
+        val layoutManager = LinearLayoutManager(context, VERTICAL, false)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.addItemDecoration(DividerItemDecoration(context, VERTICAL))
+        recyclerView.adapter = adapter
     }
 
-//    companion object {
-//        fun newInstance(): RoomListFragment =
-//            RoomListFragment()
-//    }
+    private fun getRooms() {
+        GameRepository.instance.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
+            adapter.submitList(rooms)
+        })
+        GameRepository.instance.getRooms()
+    }
+
+
 }
