@@ -12,9 +12,6 @@ import com.android.tikalarcorefuse.data.Room
 import com.android.tikalarcorefuse.data.source.GameRepository
 import com.android.tikalarcorefuse.R
 import com.android.tikalarcorefuse.databinding.FragmentRoomListBinding
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class RoomListFragment : Fragment() {
 
@@ -38,10 +35,7 @@ class RoomListFragment : Fragment() {
 
         return binding.root
     }
-
-    fun addRoom() {
-        GameRepository.instance.addRooms(Room("Room 5", 6))
-    }
+    
 
     fun getRooms(adapter: RoomsAdapter) {
 
@@ -59,10 +53,10 @@ class RoomListFragment : Fragment() {
         }
     }
 
-    companion object {
-        fun newInstance(): RoomListFragment =
-            RoomListFragment()
-    }
+//    companion object {
+//        fun newInstance(): RoomListFragment =
+//            RoomListFragment()
+//    }
 }
 
 class fakeData {
