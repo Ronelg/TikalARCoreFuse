@@ -45,7 +45,6 @@ class RoomListFragment : Fragment() {
         return binding.root
     }
 
-
     fun getRooms(adapter: RoomsAdapter) {
         GameRepository.instance.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
             adapter.submitList(rooms)
@@ -55,7 +54,7 @@ class RoomListFragment : Fragment() {
 
     private fun createClickListener(): View.OnClickListener? {
         return View.OnClickListener {
-            findNavController().navigate(R.id.action_roomListFragment_to_createRoom)
+            findNavController().navigate(R.id.action_createRoom_to_createRoomARFragment)
         }
     }
 
@@ -80,18 +79,4 @@ class RoomListFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-//    companion object {
-//        fun newInstance(): RoomListFragment =
-//            RoomListFragment()
-//    }
-}
-
-class fakeData {
-
-    fun getListOfRooms(): List<Room> {
-        return listOf(
-            Room("room 1"),
-            Room("room 2")
-        )
-    }
 }

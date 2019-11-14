@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.android.tikalarcorefuse.R
@@ -36,7 +37,11 @@ class CreateRoomFragment : Fragment() {
                 name = etName.text.toString(),
                 numOfUser = etNumOfUsers.text.toString().toInt()
             )
-        )
-        findNavController().navigate(R.id.action_createRoom_to_roomListFragment)
+        ) { roomId ->
+            val bundle = bundleOf("roomId" to roomId)
+            findNavController().navigate(R.id.action_createRoom_to_createRoomARFragment, bundle)
+        }
+
+
     }
 }
