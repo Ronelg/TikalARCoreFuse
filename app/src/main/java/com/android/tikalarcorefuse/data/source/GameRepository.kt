@@ -19,7 +19,7 @@ class GameRepository private constructor() {
 
     val roomsHash = hashMapOf<String, Room>()
 
-    fun addRooms(room: Room) {
+    fun addRooms(room: Room, callback: ((String) -> Unit)?) {
         val docData = hashMapOf(
             "name" to room.name,
             "numOfUser" to room.numOfUser,
@@ -32,6 +32,8 @@ class GameRepository private constructor() {
             .add(docData)
             .addOnSuccessListener {
                 d("Room item successfully written!")
+                //it.id
+                callback?.let { it1 -> it1(it.id) }
             }
             .addOnFailureListener {
                 e("Error writing document")
@@ -48,9 +50,9 @@ class GameRepository private constructor() {
             }
             if (result != null) {
                 for (document in result) {
-//                    val room = document.toObject(Room::class.java)
-//                    room.id = document.id
-//                    roomsHash[document.id] = room
+                    val room = document.toObject(Room::class.java)
+                    room.id = document.id
+                    roomsHash[document.id] = room
                 }
                 roomsLiveData.postValue(roomsHash.values.toList())
             }

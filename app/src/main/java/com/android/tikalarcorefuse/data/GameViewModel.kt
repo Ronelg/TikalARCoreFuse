@@ -21,8 +21,8 @@ class GameViewModel : ViewModel(), Observer<List<Room>> {
         roomsLiveData.postValue(list)
     }
 
-    fun addRoom(room: Room) {
-        GameRepository.instance.addRooms(room)
+    fun addRoom(room: Room, callback: ((String) -> Unit)?) {
+        GameRepository.instance.addRooms(room, null)
 
     }
 
