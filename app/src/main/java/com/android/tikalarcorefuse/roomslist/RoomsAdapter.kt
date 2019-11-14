@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.android.tikalarcorefuse.databinding.RoomItemBinding
 
-class RoomsAdapter() :
+class RoomsAdapter :
     ListAdapter<RoomObject, RoomsAdapter.RoomViewHolder>(RoomDiffCallback()) {
 
 
