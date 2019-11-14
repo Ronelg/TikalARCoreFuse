@@ -31,7 +31,7 @@ class RoomListFragment : Fragment() {
     ): View? {
 
         val binding = FragmentRoomListBinding.inflate(inflater, container, false)
-        context ?: return binding.root
+        val context = this.context ?: return binding.root
 
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
@@ -62,7 +62,6 @@ class RoomListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        val inflater: MenuInflater = inflater
         inflater.inflate(R.menu.app_menu, menu)
     }
 
