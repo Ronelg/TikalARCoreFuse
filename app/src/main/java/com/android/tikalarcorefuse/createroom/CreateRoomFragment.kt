@@ -33,8 +33,8 @@ class CreateRoomFragment : Fragment() {
     private fun addRoom() {
         GameRepository.instance.addRooms(
             Room(
-                etName.text.toString(),
-                etNumOfUsers.text.toString().toInt()
+                name = etName.text.toString(),
+                numOfUser = etNumOfUsers.text.toString().toInt()
             )
         )
         findNavController().navigate(R.id.action_createRoom_to_roomListFragment)

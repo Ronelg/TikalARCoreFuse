@@ -15,6 +15,8 @@ class GameRepository private constructor() {
 
     val roomsLiveData = MutableLiveData<List<Room>>()
 
+    val roomsHash = hashMapOf<String, Room>()
+
     fun addRooms(room: Room) {
         val docData = hashMapOf(
             "name" to room.name,
@@ -35,24 +37,25 @@ class GameRepository private constructor() {
 
     }
 
-    fun getRooms() {
+    private fun fetchRooms() {
         val collectionRef = db.collection(ROOM_COLLECTION)
         collectionRef.get()
-            .addOnSuccessListener {
-                if (it.isEmpty) {
-                    d("No rooms")
-                } else {
-                    val rooms = it.toObjects(Room::class.java)
-
-                    roomsLiveData.postValue(rooms)
-                    d("Room item successfully read!")
-                    d(rooms.toString())
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val room = document.toObject(Room::class.java)
+                    room.id = document.id
+                    roomsHash[document.id] = room
                 }
-
+                d("Room item successfully read!")
+                roomsLiveData.postValue(roomsHash.values.toList())
             }
             .addOnFailureListener {
                 e("Error reading document")
             }
+    }
+
+    fun getRooms() {
+        fetchRooms()
     }
 
     private object HOLDER {

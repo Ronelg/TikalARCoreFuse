@@ -1,6 +1,7 @@
 package com.android.tikalarcorefuse.data
 
 data class Room(
+    var id: String? = null,
     var name: String? = null,
     var numOfUser: Int? =0,
     var items: List<Items>? = null
