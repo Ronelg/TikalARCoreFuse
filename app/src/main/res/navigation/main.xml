@@ -4,16 +4,23 @@
     android:id="@+id/main"
     app:startDestination="@id/signInFragment">
 
-
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.android.tikalarcorefuse.login.SignInFragment"
-        android:label="SignInFragment" >
+        android:label="SignInFragment">
         <action
-            android:id="@+id/action_signInFragment_to_createRoom"
-            app:destination="@id/createRoom" />
+            android:id="@+id/action_signInFragment_to_roomsListFragment"
+            app:destination="@id/roomsListFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/roomsListFragment"
+        android:name="com.android.tikalarcorefuse.createroom.RoomsListFragment"
+        android:label="RoomsListFragment">
+        <action
+            android:id="@+id/action_roomsListFragment_to_createRoom"
+            app:destination="@id/createRoom" />
+    </fragment>
 
     <fragment
         android:id="@+id/createRoom"
