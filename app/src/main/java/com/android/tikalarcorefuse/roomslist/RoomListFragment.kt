@@ -2,6 +2,7 @@ package com.android.tikalarcorefuse.roomslist
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,7 +20,8 @@ import com.android.tikalarcorefuse.databinding.FragmentRoomListBinding
 import com.google.firebase.auth.FirebaseAuth
 import timber.log.Timber
 
-class RoomListFragment : Fragment() {
+class RoomListFragment : Fragment(), RoomsAdapter.AdapterClickListener {
+
 
     private val viewModel: GameViewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory.instance).get(GameViewModel::class.java)
@@ -28,7 +30,7 @@ class RoomListFragment : Fragment() {
     lateinit var adapter : RoomsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = RoomsAdapter()
+        adapter = RoomsAdapter(this)
     }
 
     override fun onCreateView(
@@ -82,4 +84,12 @@ class RoomListFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    override fun onRoomItemClicked(room: Room) {
+        findNavController().navigate(R.id.action_roomListFragment_to_gameWaitFragment, bundleOf("RoomId" to room.id))
+    }
+
+//    companion object {
+//        fun newInstance(): RoomListFragment =
+//            RoomListFragment()
+//    }
 }

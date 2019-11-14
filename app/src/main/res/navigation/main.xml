@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_roomListFragment_to_landingFragment"
             app:destination="@id/landingFragment" />
+        <action
+            android:id="@+id/action_roomListFragment_to_gameWaitFragment"
+            app:destination="@id/gameWaitFragment" />
     </fragment>
 
     <fragment
@@ -51,6 +54,14 @@
             android:id="@+id/action_landingFragment_to_roomListFragment"
             app:destination="@id/roomListFragment"
             app:popUpTo="@+id/main" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameWaitFragment"
+        android:name="com.android.tikalarcorefuse.waiting.GameWaitFragment"
+        android:label="GameWaitFragment" >
+        <argument
+            android:name="RoomId"
+            app:argType="string" />
     </fragment>
 
     <fragment
