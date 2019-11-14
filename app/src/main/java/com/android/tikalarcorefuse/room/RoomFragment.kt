@@ -30,7 +30,7 @@ class RoomFragment : Fragment() {
 
         //TODO get room object from outside
         val room = Room()
-        room.items?.let {
+        room.items.let {
             items = it as ArrayList<Item>
         }
     }
