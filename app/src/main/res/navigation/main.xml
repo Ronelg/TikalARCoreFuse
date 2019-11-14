@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.android.tikalarcorefuse.login.SignInFragment"
-        android:label="SignInFragment">
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_roomListFragment"
             app:destination="@id/roomListFragment" />
@@ -17,7 +18,8 @@
     <fragment
         android:id="@+id/roomListFragment"
         android:name="com.android.tikalarcorefuse.roomslist.RoomListFragment"
-        android:label="RoomListFragment">
+        android:label="RoomListFragment"
+        tools:layout="@layout/fragment_room_list">
         <action
             android:id="@+id/action_roomListFragment_to_createRoom"
             app:destination="@id/createRoom" />
@@ -25,6 +27,7 @@
 
     <fragment
         android:id="@+id/createRoom"
+        tools:layout="@layout/fragment_create_room"
         android:name="com.android.tikalarcorefuse.createroom.CreateRoomFragment"
         android:label="CreateRoom" />
     <fragment
