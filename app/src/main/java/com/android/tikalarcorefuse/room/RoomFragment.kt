@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.android.tikalarcorefuse.R
 import com.android.tikalarcorefuse.data.Item
 import com.android.tikalarcorefuse.data.Room
-import com.android.tikalarcorefuse.data.source.GameRepository
 
 class RoomFragment : Fragment() {
 
@@ -29,23 +28,23 @@ class RoomFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(RoomViewModel::class.java)
 
         //TODO get room object from outside
-        val room = Room()
+        val room = Room("aa", "uuu", 2, ArrayList())
         room.items?.let {
             items = it as ArrayList<Item>
         }
     }
 
-    fun popedBaloon(baloonId:String) {
+    fun popedBaloon(baloonId: String) {
         items.forEach {
-            if (it.baloonId==baloonId) {
+            if (it.baloonId == baloonId) {
                 items.remove(it)
                 return
             }
         }
     }
 
-    fun updateServerOnPoopedBaloon(){
-       // GameRepository.instance.
+    fun updateServerOnPoopedBaloon() {
+        // GameRepository.instance.
     }
 
 }
