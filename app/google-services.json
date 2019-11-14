@@ -15,11 +15,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "835771351189-e05pjcr7dosq88d1fba54duhgai3lsoq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.tikalarcorefuse",
+            "certificate_hash": "8b5564abfd1f06c015dc094b8cbdf7dffb879c4b"
+          }
+        },
+        {
           "client_id": "835771351189-vf5g4ih1kdbr74j5j3vc68e1to7475nq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.android.tikalarcorefuse",
             "certificate_hash": "fe8005e5eab001e3abdc078d8d6e3f5a4dad1347"
+          }
+        },
+        {
+          "client_id": "835771351189-7aq4gtudl6dq3vdnmltckpfn92gf2q04.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.tikalarcorefuse",
+            "certificate_hash": "3d09b147800723a59312ca37e33b4cedb4c56b93"
           }
         },
         {
@@ -36,14 +52,6 @@
           "android_info": {
             "package_name": "com.android.tikalarcorefuse",
             "certificate_hash": "8a8f099a810dcdbd7df7a6a3443fde920e476f9b"
-          }
-        },
-        {
-          "client_id": "835771351189-hub0ak4rrggq7evcvqv956b0k6i6om4i.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.android.tikalarcorefuse",
-            "certificate_hash": "8b5564abfd1f06c015dc094b8cbdf7dffb879c4b"
           }
         },
         {
