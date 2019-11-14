@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "835771351189-e05pjcr7dosq88d1fba54duhgai3lsoq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.android.tikalarcorefuse",
+            "certificate_hash": "8b5564abfd1f06c015dc094b8cbdf7dffb879c4b"
+          }
+        },
+        {
           "client_id": "835771351189-vf5g4ih1kdbr74j5j3vc68e1to7475nq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

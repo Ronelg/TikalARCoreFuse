@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.android.tikalarcorefuse.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -93,7 +94,11 @@ class SignInFragment : Fragment() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
-                    updateUI(user)
+                    if(user != null){
+                        navigate()
+                    }else {
+                        updateUI(user)
+                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.e("SignInFragment","firebaseAuthWithGoogle: There was an error: $task")
@@ -102,6 +107,11 @@ class SignInFragment : Fragment() {
                 }
             }
     }
+
+    private fun navigate() {
+        findNavController(this).navigate(R.id.action_signInFragment_to_roomListFragment)
+    }
+
     private fun updateUI(user: FirebaseUser?) {
 //        hideProgressDialog()
         Log.i("SignInFragment", "User null")
@@ -109,7 +119,6 @@ class SignInFragment : Fragment() {
 
         status.setText(R.string.signed_out)
         detail.text = null
-
         signInButton.visibility = View.VISIBLE
         signOutAndDisconnect.visibility = View.GONE
     }
