@@ -27,9 +27,10 @@
 
     <fragment
         android:id="@+id/createRoom"
-        tools:layout="@layout/fragment_create_room"
         android:name="com.android.tikalarcorefuse.createroom.CreateRoomFragment"
-        android:label="CreateRoom" />
+        android:label="CreateRoom"
+        tools:layout="@layout/fragment_create_room" />
+
     <fragment
         android:id="@+id/landingFragment"
         android:name="com.android.tikalarcorefuse.landing.LandingFragment"
@@ -43,9 +44,10 @@
             app:destination="@id/roomListFragment" />
 
     </fragment>
-    <fragment android:label="CreateRoom"
+    <fragment
         android:id="@id/createRoom"
         android:name="com.android.tikalarcorefuse.createroom.CreateRoomFragment"
+        android:label="CreateRoom"
         tools:layout="@layout/fragment_create_room">
         <action
             android:id="@+id/action_createRoom_to_roomListFragment"
