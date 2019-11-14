@@ -34,7 +34,7 @@
         android:id="@+id/landingFragment"
         android:name="com.android.tikalarcorefuse.landing.LandingFragment"
         android:label="fragment_landing"
-        tools:layout="@layout/fragment_landing" >
+        tools:layout="@layout/fragment_landing">
         <action
             android:id="@+id/action_landingFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
@@ -42,6 +42,11 @@
             android:id="@+id/action_landingFragment_to_roomListFragment"
             app:destination="@id/roomListFragment" />
 
+    </fragment>
+    <fragment android:label="CreateRoom" >
+        <action
+            android:id="@+id/action_createRoom_to_roomListFragment"
+            app:destination="@id/roomListFragment" />
     </fragment>
 
 </navigation>
