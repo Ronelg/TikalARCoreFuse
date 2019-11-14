@@ -54,9 +54,7 @@ class GameRepository private constructor() {
             }
     }
 
-    fun getRooms() {
-        fetchRooms()
-    }
+    fun getRooms() = fetchRooms()
 
     private object HOLDER {
         val INSTANCE = GameRepository()
