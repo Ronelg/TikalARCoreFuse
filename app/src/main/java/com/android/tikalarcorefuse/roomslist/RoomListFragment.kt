@@ -70,7 +70,10 @@ class RoomListFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = RoomsAdapter()
+        adapter = RoomsAdapter{
+                Timber.i("click the id : $it")
+            }
+
 
         val layoutManager = LinearLayoutManager(context, VERTICAL, false)
         recyclerView.layoutManager = layoutManager

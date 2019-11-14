@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.tikalarcorefuse.R
 import com.android.tikalarcorefuse.data.Room
 
-class RoomsAdapter : ListAdapter<Room, RoomsAdapter.RoomViewHolder>(RoomDiffCallback()) {
+class RoomsAdapter(val callback: ((String?) -> Unit)?) :
+    ListAdapter<Room, RoomsAdapter.RoomViewHolder>(RoomDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -35,6 +36,8 @@ class RoomsAdapter : ListAdapter<Room, RoomsAdapter.RoomViewHolder>(RoomDiffCall
         fun bind(room: Room) {
             title?.text = room.name
             subtitle?.text = "Users ${room.numOfUser}"
+            itemView.setOnClickListener { callback?.invoke(room.id) }
+
         }
     }
 }
