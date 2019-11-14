@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.android.tikalarcorefuse.data.Room
 import com.android.tikalarcorefuse.databinding.RoomItemBinding
 
 class RoomsAdapter :
-    ListAdapter<RoomObject, RoomsAdapter.RoomViewHolder>(RoomDiffCallback()) {
+    ListAdapter<Room, RoomsAdapter.RoomViewHolder>(RoomDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
@@ -21,10 +22,10 @@ class RoomsAdapter :
     }
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
-        val roomObject = getItem(position)
+        val room = getItem(position)
         holder.apply {
-            bind(roomObject)
-            itemView.tag = roomObject
+            bind(room)
+            itemView.tag = room
         }
     }
 
@@ -34,18 +35,18 @@ class RoomsAdapter :
     ) : RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(room: RoomObject) {
+        fun bind(room: Room) {
             binding.roomName = room.name
         }
     }
 }
 
-private class RoomDiffCallback : DiffUtil.ItemCallback<RoomObject>() {
-    override fun areItemsTheSame(oldItem: RoomObject, newItem: RoomObject): Boolean {
+private class RoomDiffCallback : DiffUtil.ItemCallback<Room>() {
+    override fun areItemsTheSame(oldItem: Room, newItem: Room): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: RoomObject, newItem: RoomObject): Boolean {
+    override fun areContentsTheSame(oldItem: Room, newItem: Room): Boolean {
         return oldItem.name == newItem.name
     }
 

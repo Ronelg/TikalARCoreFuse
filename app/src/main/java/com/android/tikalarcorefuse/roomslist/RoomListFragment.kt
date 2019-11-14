@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.tikalarcorefuse.data.Room
 import com.android.tikalarcorefuse.data.source.GameRepository
 import com.android.tikalarcorefuse.R
 import com.android.tikalarcorefuse.databinding.FragmentRoomListBinding
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class RoomListFragment : Fragment() {
 
@@ -30,18 +34,23 @@ class RoomListFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.clickListener = createClickListener()
 
-        adapter.submitList(fakeData().getListOfRooms())
+        getRooms(adapter)
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        addRoom()
-    }
-
     fun addRoom() {
         GameRepository.instance.addRooms(Room("Room 5", 6))
+    }
+
+    fun getRooms(adapter: RoomsAdapter) {
+
+        GameRepository.instance.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
+            adapter.submitList(rooms)
+        })
+        GameRepository.instance.getRooms()
+
+
     }
 
     private fun createClickListener(): View.OnClickListener? {
