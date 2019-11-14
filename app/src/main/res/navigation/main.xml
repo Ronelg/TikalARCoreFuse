@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_roomListFragment"
-            app:destination="@id/roomListFragment" />
+            app:destination="@id/roomListFragment"
+            app:popUpTo="@+id/main" />
     </fragment>
 
     <fragment
@@ -45,7 +46,8 @@
             app:destination="@id/signInFragment" />
         <action
             android:id="@+id/action_landingFragment_to_roomListFragment"
-            app:destination="@id/roomListFragment" />
+            app:destination="@id/roomListFragment"
+            app:popUpTo="@+id/main" />
     </fragment>
 
 </navigation>
