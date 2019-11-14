@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
+import com.android.tikalarcorefuse.R
 import com.android.tikalarcorefuse.data.Room
 import com.android.tikalarcorefuse.data.source.GameRepository
-import com.android.tikalarcorefuse.R
 import com.android.tikalarcorefuse.databinding.FragmentRoomListBinding
 import com.google.firebase.auth.FirebaseAuth
 import timber.log.Timber
@@ -34,6 +36,7 @@ class RoomListFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         binding.layoutManager = layoutManager
+        binding.recyclerView.addItemDecoration(DividerItemDecoration(context, VERTICAL))
         binding.recyclerView.adapter = adapter
         binding.clickListener = createClickListener()
 
@@ -41,7 +44,7 @@ class RoomListFragment : Fragment() {
         setHasOptionsMenu(true)
         return binding.root
     }
-    
+
 
     fun getRooms(adapter: RoomsAdapter) {
         GameRepository.instance.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
@@ -85,10 +88,10 @@ class RoomListFragment : Fragment() {
 
 class fakeData {
 
-    fun getListOfRooms(): List<RoomObject> {
+    fun getListOfRooms(): List<Room> {
         return listOf(
-            RoomObject("room 1"),
-            RoomObject("room 2")
+            Room("room 1"),
+            Room("room 2")
         )
     }
 }

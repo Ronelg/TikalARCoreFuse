@@ -1,6 +1,5 @@
 package com.android.tikalarcorefuse.data.source
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.tikalarcorefuse.data.Room
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,6 +14,8 @@ class GameRepository private constructor() {
     private val db = FirebaseFirestore.getInstance()
 
     val roomsLiveData = MutableLiveData<List<Room>>()
+
+    val roomsHash = hashMapOf<String, Room>()
 
     fun addRooms(room: Room) {
         val docData = hashMapOf(
@@ -36,25 +37,25 @@ class GameRepository private constructor() {
 
     }
 
-    fun getRooms() {
+    private fun fetchRooms() {
         val collectionRef = db.collection(ROOM_COLLECTION)
         collectionRef.get()
-            .addOnSuccessListener {
-                if (it.isEmpty) {
-                    d("No rooms")
-                } else {
-
-                    val rooms = it.toObjects(Room::class.java)
-
-                    roomsLiveData.postValue(rooms)
-                    d("Room item successfully read!")
-                    d(rooms.toString())
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val room = document.toObject(Room::class.java)
+                    room.id = document.id
+                    roomsHash[document.id] = room
                 }
-
+                d("Room item successfully read!")
+                roomsLiveData.postValue(roomsHash.values.toList())
             }
             .addOnFailureListener {
                 e("Error reading document")
             }
+    }
+
+    fun getRooms() {
+        fetchRooms()
     }
 
     private object HOLDER {
