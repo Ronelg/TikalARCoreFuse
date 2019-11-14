@@ -1,5 +1,6 @@
 package com.android.tikalarcorefuse
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.ar.sceneform.ux.ArFragment
@@ -12,9 +13,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val intent= Intent(this, CreateRoomFormActivity::class.java)
+        startActivity(intent)
 
 
-        (arFragment as ArFragment).setOnTapArPlaneListener { hitResult, plane, motionEvent ->
+        (arFragment as ArFragment).setOnTapArPlaneListener {
+                hitResult, plane, motionEvent ->
         }
 
     }
