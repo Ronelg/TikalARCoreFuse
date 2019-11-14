@@ -1,9 +1,9 @@
 package com.android.tikalarcorefuse.data
 
 data class Room(
-    val name: String? = null,
-    val numOfUser: Int? =0,
-    val items: List<Items>? = null
+    var name: String? = null,
+    var numOfUser: Int? =0,
+    var items: List<Items>? = null
 )
 
 data class Items(
