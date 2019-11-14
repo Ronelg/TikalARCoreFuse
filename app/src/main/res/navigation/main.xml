@@ -8,4 +8,8 @@
         android:id="@+id/createRoom"
         android:name="com.android.tikalarcorefuse.createroom.CreateRoom"
         android:label="CreateRoom" />
+    <fragment
+        android:id="@+id/arFuseFragment"
+        android:name="com.android.tikalarcorefuse.ArFuseFragment"
+        android:label="ArFuseFragment" />
 </navigation>
