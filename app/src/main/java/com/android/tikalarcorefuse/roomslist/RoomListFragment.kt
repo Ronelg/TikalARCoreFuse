@@ -25,7 +25,7 @@ class RoomListFragment : Fragment() {
         ViewModelProviders.of(this, ViewModelFactory.instance).get(GameViewModel::class.java)
     }
 
-    lateinit var adapter : RoomsAdapter
+    lateinit var adapter: RoomsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -39,16 +39,14 @@ class RoomListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_room_list, container, false)
     }
 
-    fun getRooms(adapter: RoomsAdapter) {
-        viewModel.getRooms()
-        viewModel.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
-          adapter.submitList(rooms)
-        })
-    }
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        getRooms()
         createRoomButton.setOnClickListener {
             findNavController().navigate(R.id.action_createRoom_to_createRoomARFragment)
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -81,10 +79,10 @@ class RoomListFragment : Fragment() {
     }
 
     private fun getRooms() {
-        GameRepository.instance.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
+        viewModel.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
             adapter.submitList(rooms)
         })
-        GameRepository.instance.getRooms()
+        viewModel.getRooms()
     }
 
 
