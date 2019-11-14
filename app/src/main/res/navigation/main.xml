@@ -29,6 +29,10 @@
         android:id="@+id/createRoom"
         tools:layout="@layout/fragment_create_room"
         android:name="com.android.tikalarcorefuse.createroom.CreateRoomFragment"
-        android:label="CreateRoom" />
+        android:label="CreateRoom" >
+        <action
+            android:id="@+id/action_createRoom_to_roomListFragment"
+            app:destination="@id/roomListFragment" />
+    </fragment>
 
 </navigation>
