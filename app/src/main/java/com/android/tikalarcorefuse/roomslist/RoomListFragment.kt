@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.tikalarcorefuse.data.Room
-import com.android.tikalarcorefuse.data.source.GameRepository
 import com.android.tikalarcorefuse.R
 import com.android.tikalarcorefuse.databinding.FragmentRoomListBinding
 
@@ -35,25 +33,16 @@ class RoomListFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        addRoom()
-    }
-
-    fun addRoom() {
-        GameRepository.instance.addRooms(Room("Room 5", 6))
-    }
-
     private fun createClickListener(): View.OnClickListener? {
         return View.OnClickListener {
             findNavController().navigate(R.id.action_roomListFragment_to_createRoom)
         }
     }
 
-    companion object {
-        fun newInstance(): RoomListFragment =
-            RoomListFragment()
-    }
+//    companion object {
+//        fun newInstance(): RoomListFragment =
+//            RoomListFragment()
+//    }
 }
 
 class fakeData {

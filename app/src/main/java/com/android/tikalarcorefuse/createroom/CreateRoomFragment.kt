@@ -7,24 +7,34 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.android.tikalarcorefuse.R
 import com.android.tikalarcorefuse.data.Room
-import com.google.firebase.firestore.FirebaseFirestore
+import com.android.tikalarcorefuse.data.source.GameRepository
 import kotlinx.android.synthetic.main.fragment_create_room.*
 
 class CreateRoomFragment : Fragment() {
 
-    val db = FirebaseFirestore.getInstance()
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view: View = inflater.inflate(R.layout.fragment_create_room, container, false)
-
-
-        btnDone.setOnClickListener{
-            val room =Room()
-            room.name=etName.text.toString()
-            room.numOfUser=etNumOfUsers.text.toString().toInt()
-
-        }
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btnDone.setOnClickListener {
+            addRoom()
+        }
+
+    }
+
+    private fun addRoom() {
+        GameRepository.instance.addRooms(
+            Room(
+                etName.text.toString(),
+                etNumOfUsers.text.toString().toInt()
+            )
+        )
     }
 }
