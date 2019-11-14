@@ -50,11 +50,6 @@ dependencies {
 }
 
 
-sceneform.asset('sampledata/Balloon1.obj',
-        'default',
-        'sampledata/Balloon1.sfa',
-        'src/main/assets/Balloon1')
-
 sceneform.asset('sampledata/balloon.fbx',
         'default',
         'sampledata/balloon.sfa',
