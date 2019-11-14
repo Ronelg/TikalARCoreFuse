@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/landingFragment">
 
     <fragment
         android:id="@+id/signInFragment"
@@ -26,5 +27,18 @@
         android:id="@+id/createRoom"
         android:name="com.android.tikalarcorefuse.createroom.CreateRoomFragment"
         android:label="CreateRoom" />
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.android.tikalarcorefuse.landing.LandingFragment"
+        android:label="fragment_landing"
+        tools:layout="@layout/fragment_landing" >
+        <action
+            android:id="@+id/action_landingFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_landingFragment_to_roomListFragment"
+            app:destination="@id/roomListFragment" />
+
+    </fragment>
 
 </navigation>
