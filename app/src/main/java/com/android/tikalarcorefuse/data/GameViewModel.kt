@@ -22,7 +22,7 @@ class GameViewModel : ViewModel(), Observer<List<Room>> {
     }
 
     fun addRoom(room: Room, callback: ((String) -> Unit)?) {
-        GameRepository.instance.addRooms(room, null)
+        GameRepository.instance.addRooms(room, callback)
 
     }
 
