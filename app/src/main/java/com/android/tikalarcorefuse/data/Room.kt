@@ -8,6 +8,7 @@ data class Room(
 )
 
 data class Item(
+    var baloonId: String,
     var x: Float,
     var y: Float,
     var z: Float

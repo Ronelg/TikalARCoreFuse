@@ -35,16 +35,16 @@ class RoomFragment : Fragment() {
         }
     }
 
-    fun popedBaloon(x: Float, y: Float, z: Float) {
+    fun popedBaloon(baloonId:String) {
         items.forEach {
-            if (it.x == x && it.y == y && it.z == z) {
+            if (it.baloonId==baloonId) {
                 items.remove(it)
                 return
             }
         }
     }
 
-    fun jjj(){
+    fun updateServerOnPoopedBaloon(){
        // GameRepository.instance.
     }
 
