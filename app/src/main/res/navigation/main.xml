@@ -43,7 +43,10 @@
             app:destination="@id/roomListFragment" />
 
     </fragment>
-    <fragment android:label="CreateRoom" >
+    <fragment android:label="CreateRoom"
+        android:id="@id/createRoom"
+        android:name="com.android.tikalarcorefuse.createroom.CreateRoomFragment"
+        tools:layout="@layout/fragment_create_room">
         <action
             android:id="@+id/action_createRoom_to_roomListFragment"
             app:destination="@id/roomListFragment" />
