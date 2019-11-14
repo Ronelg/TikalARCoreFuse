@@ -12,16 +12,16 @@ import androidx.recyclerview.widget.LinearLayoutManager.VERTICAL
 import com.android.tikalarcorefuse.R
 import com.android.tikalarcorefuse.data.Room
 import com.android.tikalarcorefuse.data.source.GameRepository
-import com.android.tikalarcorefuse.databinding.FragmentRoomListBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_room_list.*
 import timber.log.Timber
 
 class RoomListFragment : Fragment() {
 
-    lateinit var adapter : RoomsAdapter
+    lateinit var adapter: RoomsAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = RoomsAdapter()
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -29,35 +29,18 @@ class RoomListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val binding = FragmentRoomListBinding.inflate(inflater, container, false)
-        val context = this.context ?: return binding.root
-
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-        binding.layoutManager = layoutManager
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(context, VERTICAL))
-        binding.recyclerView.adapter = adapter
-        binding.clickListener = createClickListener()
-
-        getRooms(adapter)
-        setHasOptionsMenu(true)
-        return binding.root
+        return inflater.inflate(R.layout.fragment_room_list, container, false)
     }
 
-    fun getRooms(adapter: RoomsAdapter) {
-        GameRepository.instance.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
-            adapter.submitList(rooms)
-        })
-        GameRepository.instance.getRooms()
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        getRooms()
 
-    private fun createClickListener(): View.OnClickListener? {
-        return View.OnClickListener {
+        createRoomButton.setOnClickListener {
             findNavController().navigate(R.id.action_createRoom_to_createRoomARFragment)
         }
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -66,16 +49,34 @@ class RoomListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         Timber.i("onOptionsItemSelected: ")
-        if(item.itemId == R.id.logout){
+        if (item.itemId == R.id.logout) {
             try {
                 FirebaseAuth.getInstance().signOut()
-                NavHostFragment.findNavController(this).navigate(R.id.action_roomListFragment_to_landingFragment)
+                NavHostFragment.findNavController(this)
+                    .navigate(R.id.action_roomListFragment_to_landingFragment)
                 return true
-            } catch (e : Throwable){
+            } catch (e: Throwable) {
 
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun setupRecyclerView() {
+        adapter = RoomsAdapter()
+
+        val layoutManager = LinearLayoutManager(context, VERTICAL, false)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.addItemDecoration(DividerItemDecoration(context, VERTICAL))
+        recyclerView.adapter = adapter
+    }
+
+    private fun getRooms() {
+        GameRepository.instance.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
+            adapter.submitList(rooms)
+        })
+        GameRepository.instance.getRooms()
+    }
+
 
 }

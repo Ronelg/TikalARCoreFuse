@@ -1,24 +1,21 @@
 package com.android.tikalarcorefuse.roomslist
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.android.tikalarcorefuse.R
 import com.android.tikalarcorefuse.data.Room
-import com.android.tikalarcorefuse.databinding.RoomItemBinding
 
-class RoomsAdapter :
-    ListAdapter<Room, RoomsAdapter.RoomViewHolder>(RoomDiffCallback()) {
-
+class RoomsAdapter : ListAdapter<Room, RoomsAdapter.RoomViewHolder>(RoomDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
-        val binding = RoomItemBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
-        )
-        return RoomViewHolder(binding)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.room_item, parent, false)
+        return RoomViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
@@ -26,16 +23,18 @@ class RoomsAdapter :
         holder.bind(room)
     }
 
-    inner class RoomViewHolder(
-        private val binding: RoomItemBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    inner class RoomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var title: TextView? = null
+        var subtitle: TextView? = null
 
-        var room: Room? = null
+        init {
+            title = view.findViewById(R.id.title)
+            subtitle = view.findViewById(R.id.subtitle)
+        }
 
         fun bind(room: Room) {
-            this.room = room
-            binding.roomName = room.name
-            binding.numOfUser = "Users: ${room.numOfUser ?: 0}"
+            title?.text = room.name
+            subtitle?.text = "Users ${room.numOfUser}"
         }
     }
 }
