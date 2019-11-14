@@ -29,7 +29,10 @@ class RoomListFragment : Fragment(){
         return binding.root
     }
 
-
+    companion object {
+        fun newInstance(): RoomListFragment =
+            RoomListFragment()
+    }
 }
 
 class fakeData{
