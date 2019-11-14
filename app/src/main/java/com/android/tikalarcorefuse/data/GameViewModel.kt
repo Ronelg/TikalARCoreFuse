@@ -11,14 +11,14 @@ class GameViewModel : ViewModel(), Observer<List<Room>> {
         GameRepository.instance.roomsLiveData.observeForever(this)
     }
 
-    val roomsLiveData = MutableLiveData<List<Room>>()
+    val roomsLiveData: MutableLiveData<List<Room>>? = MutableLiveData()
 
     fun getRooms() {
         GameRepository.instance.fetchRooms()
     }
 
     override fun onChanged(list: List<Room>?) {
-        roomsLiveData.postValue(list)
+        roomsLiveData?.postValue(list)
     }
 
     fun addRoom(room: Room, callback: ((String) -> Unit)?) {

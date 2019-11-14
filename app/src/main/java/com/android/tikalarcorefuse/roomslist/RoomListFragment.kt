@@ -79,7 +79,7 @@ class RoomListFragment : Fragment() {
     }
 
     private fun getRooms() {
-        viewModel.roomsLiveData.observe(this, Observer { rooms: List<Room> ->
+        viewModel.roomsLiveData?.observe(this, Observer { rooms: List<Room> ->
             adapter.submitList(rooms)
         })
         viewModel.getRooms()
