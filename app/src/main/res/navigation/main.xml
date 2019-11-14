@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_roomListFragment_to_createRoom"
             app:destination="@id/createRoom" />
+        <action
+            android:id="@+id/action_roomListFragment_to_landingFragment"
+            app:destination="@id/landingFragment" />
     </fragment>
 
     <fragment
